@@ -1,5 +1,5 @@
 import numpy as np
-from ml_library.ml_lib import metrics
+from ml_training.ml_lib import metrics
 
 
 class KNeighborsClassifier:
