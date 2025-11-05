@@ -12,3 +12,12 @@ def accuracy_score(y_true, y_pred, normalize=True):
         return correct / len(y_true)
     else:
         return correct
+
+
+def euclidean_distance(x, y):
+    p1 = np.array(x)
+    p2 = np.array(y)
+    if p1.shape != p2.shape:
+        raise ValueError('shape of x and y must be equal')
+
+    return np.sqrt(np.sum(np.power(p1 - p2, 2)))
