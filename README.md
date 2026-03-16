@@ -1,2 +1,2 @@
 # ml_library
-Machine learning library
+Machine learning library from scratch
