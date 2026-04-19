@@ -20,3 +20,4 @@ def r2_score(y_true, y_pred):
     elif errm  == 0:
         return 0
     return 1-errp/errm
+    
