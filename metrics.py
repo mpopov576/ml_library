@@ -8,3 +8,6 @@ def accuracy_score(y_true, y_pred, normalize=True):
 
 def euclidean_distance(a, b):
     return np.sqrt(np.sum((a-b)**2))
+
+def manhattan_distance(a, b):
+    return np.sum(np.abs(a-b))
