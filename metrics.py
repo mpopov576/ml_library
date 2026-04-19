@@ -11,3 +11,12 @@ def euclidean_distance(a, b):
 
 def manhattan_distance(a, b):
     return np.sum(np.abs(a-b))
+
+def r2_score(y_true, y_pred):
+    errm =  np.sum((y_true - np.mean(y_true))**2)
+    errp = np.sum((y_true-y_pred)**2)
+    if errp == 0 and errm == 0 :
+        return 1
+    elif errm  == 0:
+        return 0
+    return 1-errp/errm
