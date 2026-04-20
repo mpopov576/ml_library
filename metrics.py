@@ -78,5 +78,17 @@ def f1_score(y_true, y_pred):
 
     return 2*p*r/(p+r)
 
+def log_loss(y_true, y_pred):
+    y_true = np.asarray(y_true)
+    y_pred = np.asarray(y_pred)
+
+    eps = 1e-9
+    y_pred = np.clip(y_pred, eps, 1 - eps)
+
+    if y_pred.ndim == 1:
+        return -np.mean(y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred))
+
+    return -np.mean(np.sum(y_true * np.log(y_pred), axis=1))
+
 
 
