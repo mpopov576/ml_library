@@ -94,7 +94,7 @@ class LogisticRegression:
     def score(self, X, y):
         return accuracy_score(y, self.predict(X))
 
-
+# ridge regression is smoother than lasso, its better when most features are useful
 
 class RidgeRegression:
     def __init__(self, alpha=1.0):
@@ -119,6 +119,52 @@ class RidgeRegression:
         # normal equation is used instead of gd
         self.coef_ = np.linalg.inv(X.T @ X + self.alpha * np.eye(X.shape[1])) @ X.T @ y
         self.intercept_ = y.mean() - X.mean(axis=0) @ self.coef_
+        self.fitted = True
+        return self
+
+    def predict(self, X):
+        X = np.asarray(X)
+        if self.fitted:
+            return X @ self.coef_ + self.intercept_
+            
+        raise ValueError("The model has not been fitted yet.")
+
+    def score(self, X, y):
+        return r2_score(y, self.predict(X))
+        
+# lasso regression is better than ridge regression when alot features are useless, because it
+# sets their weights to 0
+
+class LassoRegression:
+    def __init__(self, alpha=1.0):
+        self.coef_ = None
+        self.intercept_ = None
+        self.fitted = False
+        self.alpha = alpha
+
+    def fit(self, X, y):
+        X = np.asarray(X)
+        y = np.asarray(y)
+
+        n_samples, n_features = X.shape
+
+        self.coef_ = np.zeros(n_features)
+        self.intercept_ = 0.0
+        max_iter = 1000
+        lr = 0.01
+
+        for _ in range(max_iter):
+            y_pred = X @ self.coef_ + self.intercept_
+            error = y - y_pred
+
+            prev_coef = np.copy(self.coef_)
+
+            self.coef_ -= lr * (-2 * (X.T @ error) + self.alpha * np.sign(self.coef_))
+            self.intercept_ -= lr * (-2 * np.sum(error) / n_samples)
+
+            if np.linalg.norm(self.coef_ - prev_coef) < 1e-6:
+                break;
+                
         self.fitted = True
         return self
 
