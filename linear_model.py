@@ -28,6 +28,7 @@ class LinearRegression:
         return self
 
     def predict(self, X):
+        X = np.asarray(X)
         if self.fitted:
             return X @ self.coef_ + self.intercept_
 
@@ -84,6 +85,7 @@ class LogisticRegression:
         raise ValueError("The model has not been fitted yet.")
 
     def predict(self, X):
+        X = np.asarray(X)
         if self.fitted:
             return np.argmax(self.predict_proba(X), axis=1)
 
@@ -91,3 +93,41 @@ class LogisticRegression:
 
     def score(self, X, y):
         return accuracy_score(y, self.predict(X))
+
+
+
+class RidgeRegression:
+    def __init__(self, alpha=1.0):
+        self.coef_ = None
+        self.intercept_ = None
+        self.fitted = False
+        self.alpha = alpha
+
+    def fit(self, X, y):
+        X = np.asarray(X)
+        y = np.asarray(y)
+
+        if np.allclose(y, y.mean()):
+            self.fitted = True
+            self.coef_ = np.zeros(X.shape[1])
+            self.intercept_ = y.mean()
+            return self
+
+        if self.alpha < 0:
+            raise ValueError("alpha must be non-negative.")
+
+        # normal equation is used instead of gd
+        self.coef_ = np.linalg.inv(X.T @ X + self.alpha * np.eye(X.shape[1])) @ X.T @ y
+        self.intercept_ = y.mean() - X.mean(axis=0) @ self.coef_
+        self.fitted = True
+        return self
+
+    def predict(self, X):
+        X = np.asarray(X)
+        if self.fitted:
+            return X @ self.coef_ + self.intercept_
+
+        raise ValueError("The model has not been fitted yet.")
+
+    def score(self, X, y):
+        return r2_score(y, self.predict(X))
