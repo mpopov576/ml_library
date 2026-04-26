@@ -10,8 +10,9 @@ class Node:
         self.value = value
 
 
+
 class DecisionTreeClassifier:
-    def __init__(self, max_depth=10, min_samples_split=2, min_samples_leaf=1, criterion='gini'):
+    def __init__(self, max_depth=10, min_samples_split=2, min_samples_leaf=1, criterion='gini', max_features=None):
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
         self.min_samples_leaf = min_samples_leaf
@@ -20,6 +21,7 @@ class DecisionTreeClassifier:
 
         self.criterion = criterion
         self.root = None
+        self.max_features = max_features
 
     def _impurity(self, y):
         return gini_index(y) if self.criterion == 'gini' else entropy(y)
@@ -36,7 +38,13 @@ class DecisionTreeClassifier:
         n = len(y)
         parent_impurity = self._impurity(y)
 
-        for feature in range(X.shape[1]):
+        n_features = X.shape[1]
+        features = np.arange(n_features)
+
+        if self.max_features is not None:
+            features = np.random.choice(features, self.max_features, replace=False)
+
+        for feature in features:
             thresholds = np.unique(X[:, feature])
 
             for threshold in thresholds:
@@ -98,3 +106,74 @@ class DecisionTreeClassifier:
         X = np.array(X)
 
         return np.array([self._predict_one(x, self.root) for x in X])
+
+
+
+class RandomForestClassifier:
+    def __init__(self, n_estimators=10, max_depth=10, min_samples_split=2, min_samples_leaf=1, max_features='sqrt', random_state=42):
+        self.n_estimators = n_estimators
+        self.max_depth = max_depth
+        self.min_samples_split = min_samples_split
+        self.min_samples_leaf = min_samples_leaf
+        self.max_features = max_features
+        self.random_state = random_state
+
+        self.trees = []
+
+    def _get_max_features(self, n_features):
+        if self.max_features == 'sqrt':
+            return int(np.sqrt(n_features))
+
+        elif self.max_features == 'log2':
+            return int(np.log2(n_features))
+
+        elif isinstance(self.max_features, int):
+            return self.max_features
+
+        else:
+            return n_features
+
+    def fit(self, X, y):
+        X = np.array(X)
+        y = np.array(y)
+
+        rng = np.random.default_rng(self.random_state)
+        n_samples, n_features = X.shape
+
+        max_features = self._get_max_features(n_features)
+
+        self.trees = []
+
+        for _ in range(self.n_estimators):
+            indices = rng.choice(n_samples, n_samples, replace=True)
+            X_sample = X[indices]
+            y_sample = y[indices]
+
+            tree = DecisionTreeClassifier(max_depth=self.max_depth,
+                                          min_samples_split=self.min_samples_split,
+                                          min_samples_leaf=self.min_samples_leaf,
+                                          max_features=max_features,)
+
+            tree.fit(X_sample, y_sample)
+            self.trees.append(tree)
+
+        return self
+
+    def predict(self, X):
+        X = np.array(X)
+
+        all_preds = np.array([tree.predict(X) for tree in self.trees])
+
+        final_preds = []
+        for i in range(X.shape[0]):
+            counts = np.bincount(all_preds[:, i])
+            final_preds.append(np.argmax(counts))
+
+        return np.array(final_preds)
+
+    def score(self, X, y):
+        X = np.array(X)
+        y = np.array(y)
+
+        preds = self.predict(X)
+        return np.mean(preds == y)
