@@ -177,3 +177,69 @@ class RandomForestClassifier:
 
         preds = self.predict(X)
         return np.mean(preds == y)
+
+
+
+class AdaBoostClassifier:
+    def __init__(self, n_estimators, lr=1.0, random_state=42):
+        self.n_estimators = n_estimators
+        self.lr = lr
+        self.random_state = random_state
+
+        self.models = []
+        self.alphas = []
+
+    def fit(self, X, y):
+        X = np.array(X)
+        y = np.where(np.array(y) == 0, -1, 1)
+
+        rng = np.random.default_rng(self.random_state)
+        n_samples = X.shape[0]
+
+        sample_weights = np.ones(n_samples) / n_samples
+
+        self.models = []
+        self.alphas = []
+
+        for _ in range(self.n_estimators):
+            indices = rng.choice(n_samples, size=n_samples, replace=True, p=sample_weights)
+
+            X_sample = X[indices]
+            y_sample = y[indices]
+
+            model = DecisionTreeClassifier(max_depth=1)
+            model.fit(X_sample, y_sample)
+
+            preds = model.predict(X)
+
+            incorrect = (preds != y)
+            err = np.sum(sample_weights * incorrect)
+
+            err = max(err, 1e-10)
+
+            alpha = self.lr * 0.5 * np.log((1 - err) / err)
+
+            sample_weights *= np.exp(alpha * incorrect)
+            sample_weights /= np.sum(sample_weights)
+
+            self.models.append(model)
+            self.alphas.append(alpha)
+
+        return self
+
+    def predict(self, X):
+        X = np.array(X)
+
+        final = np.zeros(X.shape[0])
+
+        for alpha, model in zip(self.alphas, self.models):
+            preds = model.predict(X)
+            final += alpha * preds
+
+        return np.where(final >= 0, 1, -1)
+
+    def score(self, X, y):
+        X = np.array(X)
+        y = np.where(np.array(y) == 0, -1, 1)
+
+        return np.mean(y == self.predict(X))
