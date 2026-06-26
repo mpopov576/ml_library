@@ -1,43 +1,83 @@
-ml_library
+````markdown
+# ml_library
 
-A modular machine learning library built from scratch using NumPy — no scikit-learn under the hood.
+A modular **machine learning library** built from scratch using **NumPy** — no `scikit-learn` under the hood.
 
+## 🚀 Implemented Algorithms
 
-Implemented Algorithms
+### Supervised Learning
 
-Supervised Learning
+- **Linear Regression**
+  - Supports regularization techniques.
+  - Suitable for continuous value prediction.
 
+- **Logistic Regression**
+  - Supports both binary and multiclass classification.
+  - Uses gradient-based optimization.
 
-Linear Regression — with regularization support
-Logistic Regression — binary and multiclass
-K-Nearest Neighbors — configurable distance metrics
-Naive Bayes — probabilistic classifier
-Support Vector Machine (SVM) — with custom kernel support
-Decision Tree — recursive splitting with configurable criteria
-Random Forest — ensemble of decision trees
-AdaBoost — adaptive boosting ensemble method
+- **K-Nearest Neighbors (KNN)**
+  - Configurable distance metrics.
+  - Simple instance-based learning algorithm.
 
+- **Naive Bayes**
+  - Probabilistic classifier based on Bayes' theorem.
+  - Efficient for high-dimensional datasets.
 
-Unsupervised Learning
+- **Support Vector Machine (SVM)**
+  - Supports custom kernel functions.
+  - Effective for linear and non-linear classification.
 
+- **Decision Tree**
+  - Recursive feature splitting.
+  - Configurable split criteria and stopping conditions.
 
-KMeans — centroid-based clustering
-Hierarchical Clustering — agglomerative clustering
+- **Random Forest**
+  - Ensemble of multiple decision trees.
+  - Improves accuracy and reduces overfitting.
 
+- **AdaBoost**
+  - Adaptive boosting ensemble method.
+  - Sequentially focuses on difficult training examples.
 
+---
 
-Utilities
+### Unsupervised Learning
 
+- **K-Means**
+  - Centroid-based clustering algorithm.
+  - Iteratively minimizes within-cluster variance.
 
-kernels.py — custom kernel functions for SVM and other kernel-based methods
-metrics.py — evaluation metrics for classification and regression tasks
-model_selection.py — cross-validation utilities for hyperparameter tuning
-feature_extraction.text.py — TF-IDF vectorization for NLP tasks
-stats.py — statistical utility functions used across models
+- **Hierarchical Clustering**
+  - Agglomerative clustering approach.
+  - Builds a hierarchy of clusters.
 
+---
 
+## 🛠 Utilities
 
-Installation
+- **`kernels.py`**
+  - Custom kernel functions for SVM and other kernel-based algorithms.
 
-bashgit clone https://github.com/mpopov576/ml_library.git
+- **`metrics.py`**
+  - Evaluation metrics for classification and regression.
+
+- **`model_selection.py`**
+  - Cross-validation and hyperparameter tuning utilities.
+
+- **`feature_extraction/text.py`**
+  - TF-IDF vectorization for NLP tasks.
+
+- **`stats.py`**
+  - Statistical helper functions used throughout the library.
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/mpopov576/ml_library.git
 cd ml_library
+````
+
+```
+```
