@@ -3,7 +3,7 @@
 
 A modular **machine learning library** built from scratch using **NumPy** — no `scikit-learn` under the hood.
 
-## 🚀 Implemented Algorithms
+## Implemented Algorithms
 
 ### Supervised Learning
 
@@ -19,17 +19,9 @@ A modular **machine learning library** built from scratch using **NumPy** — no
 ### Unsupervised Learning
 
 - **K-Means**
-  - Centroid-based clustering algorithm.
-  - Iteratively minimizes within-cluster variance.
-
 - **Hierarchical Clustering**
-  - Agglomerative clustering approach.
-  - Builds a hierarchy of clusters.
-
 ---
-
-## 🛠 Utilities
-
+## Utilities
 - **`kernels.py`**
   - Custom kernel functions for SVM and other kernel-based algorithms.
 
