@@ -39,7 +39,7 @@ A modular **machine learning library** built from scratch using **NumPy** — no
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 git clone https://github.com/mpopov576/ml_library.git
