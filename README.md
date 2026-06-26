@@ -1,46 +1,43 @@
-# ml_library
-A modular machine learning library built from scratch using NumPy.
+ml_library
+
+A modular machine learning library built from scratch using NumPy — no scikit-learn under the hood.
+
 
 Implemented Algorithms
 
 Supervised Learning
 
 
-- Linear Regression — with regularization support
-- Logistic Regression — binary and multiclass
-- K-Nearest Neighbors — configurable distance metrics
-- Naive Bayes — probabilistic classifier
-- Support Vector Machine (SVM) — with custom kernel support
-- Decision Tree — recursive splitting with configurable criteria
-- Random Forest — ensemble of decision trees
-- AdaBoost — adaptive boosting ensemble method
+Linear Regression — with regularization support
+Logistic Regression — binary and multiclass
+K-Nearest Neighbors — configurable distance metrics
+Naive Bayes — probabilistic classifier
+Support Vector Machine (SVM) — with custom kernel support
+Decision Tree — recursive splitting with configurable criteria
+Random Forest — ensemble of decision trees
+AdaBoost — adaptive boosting ensemble method
 
 
 Unsupervised Learning
 
 
 KMeans — centroid-based clustering
-Hierarchical Clustering — agglomerative clustering (hierarchy.py)
+Hierarchical Clustering — agglomerative clustering
+
 
 
 Utilities
 
-Kernels (kernels.py)
 
-Custom kernel functions for use with SVM and other kernel-based methods.
+kernels.py — custom kernel functions for SVM and other kernel-based methods
+metrics.py — evaluation metrics for classification and regression tasks
+model_selection.py — cross-validation utilities for hyperparameter tuning
+feature_extraction.text.py — TF-IDF vectorization for NLP tasks
+stats.py — statistical utility functions used across models
 
-Metrics (metrics.py)
 
-Evaluation metrics for classification and regression tasks.
 
-Model Selection (model_selection.py)
+Installation
 
-Cross-validation utilities for hyperparameter tuning and model evaluation.
-
-NLP (feature_extraction.text.py)
-
-TF-IDF vectorization for transforming raw text into numerical feature representations.
-
-Stats (stats.py)
-
-Statistical utility functions used across models.
+bashgit clone https://github.com/mpopov576/ml_library.git
+cd ml_library
