@@ -6,14 +6,14 @@ Implemented Algorithms
 Supervised Learning
 
 
-Linear Regression — with regularization support
-Logistic Regression — binary and multiclass
-K-Nearest Neighbors — configurable distance metrics
-Naive Bayes — probabilistic classifier
-Support Vector Machine (SVM) — with custom kernel support
-Decision Tree — recursive splitting with configurable criteria
-Random Forest — ensemble of decision trees
-AdaBoost — adaptive boosting ensemble method
+- Linear Regression — with regularization support
+- Logistic Regression — binary and multiclass
+- K-Nearest Neighbors — configurable distance metrics
+- Naive Bayes — probabilistic classifier
+- Support Vector Machine (SVM) — with custom kernel support
+- Decision Tree — recursive splitting with configurable criteria
+- Random Forest — ensemble of decision trees
+- AdaBoost — adaptive boosting ensemble method
 
 
 Unsupervised Learning
