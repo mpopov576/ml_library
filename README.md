@@ -8,39 +8,14 @@ A modular **machine learning library** built from scratch using **NumPy** — no
 ### Supervised Learning
 
 - **Linear Regression**
-  - Supports regularization techniques.
-  - Suitable for continuous value prediction.
-
 - **Logistic Regression**
-  - Supports both binary and multiclass classification.
-  - Uses gradient-based optimization.
-
 - **K-Nearest Neighbors (KNN)**
-  - Configurable distance metrics.
-  - Simple instance-based learning algorithm.
-
 - **Naive Bayes**
-  - Probabilistic classifier based on Bayes' theorem.
-  - Efficient for high-dimensional datasets.
-
 - **Support Vector Machine (SVM)**
-  - Supports custom kernel functions.
-  - Effective for linear and non-linear classification.
-
 - **Decision Tree**
-  - Recursive feature splitting.
-  - Configurable split criteria and stopping conditions.
-
 - **Random Forest**
-  - Ensemble of multiple decision trees.
-  - Improves accuracy and reduces overfitting.
-
 - **AdaBoost**
-  - Adaptive boosting ensemble method.
-  - Sequentially focuses on difficult training examples.
-
 ---
-
 ### Unsupervised Learning
 
 - **K-Means**
@@ -78,6 +53,3 @@ A modular **machine learning library** built from scratch using **NumPy** — no
 git clone https://github.com/mpopov576/ml_library.git
 cd ml_library
 ````
-
-```
-```
