@@ -1,4 +1,4 @@
-````markdown
+
 # ml_library
 
 A modular **machine learning library** built from scratch using **NumPy** — no `scikit-learn` under the hood.
